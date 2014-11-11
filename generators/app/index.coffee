@@ -38,9 +38,14 @@ module.exports = class AnsibleGenerator extends generators.NamedBase
 			'host_vars'
 			'group_vars'
 		]
-		for folder in defaultFolders
-			@mkdir "#{@playbookDir}/#{folder}"
-			@write "#{@playbookDir}/#{folder}/.gitkeep", ''
+		
+		# Example Files
+		@mkdir "#{@playbookDir}/roles"
+		@write "#{@playbookDir}/roles/.gitkeep", ''
+		@mkdir "#{@playbookDir}/host_vars"
+		@src.copy "host_vars_example", "#{@playbookDir}/host_vars/example"
+		@mkdir "#{@playbookDir}/group_vars"
+		@src.copy "group_vars_example", "#{@playbookDir}/group_vars/example"
 		
 		# Inventory Files
 		@src.copy "production", "#{@playbookDir}/production"

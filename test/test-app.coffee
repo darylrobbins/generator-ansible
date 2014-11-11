@@ -20,8 +20,8 @@ describe "ansible-generator:app", ->
 			fileLineCounts = {}
 			fileLineCounts["#{name}/production"] = 39
 			fileLineCounts["#{name}/stage"] = 39
-			fileLineCounts["#{name}/group_vars/.gitkeep"] = 1
-			fileLineCounts["#{name}/host_vars/.gitkeep"] = 1
+			fileLineCounts["#{name}/group_vars/example"] = 4
+			fileLineCounts["#{name}/host_vars/example"] = 4
 			fileLineCounts["#{name}/site.yml"] = 3
 			fileLineCounts["#{name}/roles/.gitkeep"] = 1
 			fileLineCounts["#{name}/README.md"] = 13
@@ -54,8 +54,8 @@ describe "ansible-generator:app", ->
 			fileLineCounts = {}
 			fileLineCounts["#{name}/production"] = 39
 			fileLineCounts["#{name}/stage"] = 39
-			fileLineCounts["#{name}/group_vars/.gitkeep"] = 1
-			fileLineCounts["#{name}/host_vars/.gitkeep"] = 1
+			fileLineCounts["#{name}/group_vars/example"] = 4
+			fileLineCounts["#{name}/host_vars/example"] = 4
 			fileLineCounts["#{name}/site.yml"] = 3
 			fileLineCounts["#{name}/roles/.gitkeep"] = 1
 			fileLineCounts["#{name}/README.md"] = 13
@@ -89,8 +89,8 @@ describe "ansible-generator:app", ->
 			fileLineCounts = {}
 			fileLineCounts["#{name}/production"] = 39
 			fileLineCounts["#{name}/stage"] = 39
-			fileLineCounts["#{name}/group_vars/.gitkeep"] = 1
-			fileLineCounts["#{name}/host_vars/.gitkeep"] = 1
+			fileLineCounts["#{name}/group_vars/example"] = 4
+			fileLineCounts["#{name}/host_vars/example"] = 4
 			fileLineCounts["#{name}/site.yml"] = 3
 			fileLineCounts["#{name}/roles/.gitkeep"] = 1
 			fileLineCounts["#{name}/README.md"] = 13
