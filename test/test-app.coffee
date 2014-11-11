@@ -3,6 +3,7 @@ assert = require("yeoman-generator").assert
 helpers = require("yeoman-generator").test
 os = require("os")
 fs = require("fs")
+readline = require("readline")
 
 describe "ansible-generator:app", ->
 	
@@ -16,17 +17,25 @@ describe "ansible-generator:app", ->
 		})
 		.on "end", ->
 		
-			assert.file [
-				"#{name}/production"
-				"#{name}/stage"
-				"#{name}/group_vars/.gitkeep"
-				"#{name}/host_vars/.gitkeep"
-				"#{name}/site.yml"
-				"#{name}/roles/.gitkeep"
-				"#{name}/README.md"
-				"#{name}/Ansiblefile"
-			]
-			
+			fileLineCounts = {}
+			fileLineCounts["#{name}/production"] = 39
+			fileLineCounts["#{name}/stage"] = 39
+			fileLineCounts["#{name}/group_vars/.gitkeep"] = 1
+			fileLineCounts["#{name}/host_vars/.gitkeep"] = 1
+			fileLineCounts["#{name}/site.yml"] = 3
+			fileLineCounts["#{name}/roles/.gitkeep"] = 1
+			fileLineCounts["#{name}/README.md"] = 13
+			fileLineCounts["#{name}/Ansiblefile"] = 4
+
+			for file, lineCount of fileLineCounts
+				assert.file file
+				contents = fs.readFileSync file, 'utf8'
+				count = contents.split("\n").length
+				assert.equal lineCount, count, "Expected #{file} to have #{lineCount} lines. (Had #{count})"
+
+			readmeContents = fs.readFileSync "#{name}/README.md", 'utf8'
+			assert.notEqual -1, readmeContents.indexOf(name)
+
 			assert.noFile [
 				"#{name}/Vagrantfile"
 			]
@@ -42,17 +51,25 @@ describe "ansible-generator:app", ->
 		.withArguments([name])
 		.on "end", ->
 			
-			assert.file [
-				"#{name}/production"
-				"#{name}/stage"
-				"#{name}/group_vars/.gitkeep"
-				"#{name}/host_vars/.gitkeep"
-				"#{name}/site.yml"
-				"#{name}/roles/.gitkeep"
-				"#{name}/README.md"
-				"#{name}/Ansiblefile"
-			]
-			
+			fileLineCounts = {}
+			fileLineCounts["#{name}/production"] = 39
+			fileLineCounts["#{name}/stage"] = 39
+			fileLineCounts["#{name}/group_vars/.gitkeep"] = 1
+			fileLineCounts["#{name}/host_vars/.gitkeep"] = 1
+			fileLineCounts["#{name}/site.yml"] = 3
+			fileLineCounts["#{name}/roles/.gitkeep"] = 1
+			fileLineCounts["#{name}/README.md"] = 13
+			fileLineCounts["#{name}/Ansiblefile"] = 4
+
+			for file, lineCount of fileLineCounts
+				assert.file file
+				contents = fs.readFileSync file, 'utf8'
+				count = contents.split("\n").length
+				assert.equal lineCount, count, "Expected #{file} to have #{lineCount} lines. (Had #{count})"
+
+			readmeContents = fs.readFileSync "#{name}/README.md", 'utf8'
+			assert.notEqual -1, readmeContents.indexOf(name)
+
 			assert.noFile [
 				"#{name}/Vagrantfile"
 			]
@@ -69,17 +86,26 @@ describe "ansible-generator:app", ->
 		.withOptions({ "vagrant": true })
 		.on "end", ->
 		
-			assert.file [
-				"#{name}/production"
-				"#{name}/stage"
-				"#{name}/group_vars/.gitkeep"
-				"#{name}/host_vars/.gitkeep"
-				"#{name}/site.yml"
-				"#{name}/roles/.gitkeep"
-				"#{name}/README.md"
-				"#{name}/Ansiblefile"
-				"#{name}/Vagrantfile"
-			]
+			fileLineCounts = {}
+			fileLineCounts["#{name}/production"] = 39
+			fileLineCounts["#{name}/stage"] = 39
+			fileLineCounts["#{name}/group_vars/.gitkeep"] = 1
+			fileLineCounts["#{name}/host_vars/.gitkeep"] = 1
+			fileLineCounts["#{name}/site.yml"] = 3
+			fileLineCounts["#{name}/roles/.gitkeep"] = 1
+			fileLineCounts["#{name}/README.md"] = 13
+			fileLineCounts["#{name}/Ansiblefile"] = 4
+			fileLineCounts["#{name}/Vagrantfile"] = 29
+			fileLineCounts["#{name}/development"] = 10
+
+			for file, lineCount of fileLineCounts
+				assert.file file
+				contents = fs.readFileSync file, 'utf8'
+				count = contents.split("\n").length
+				assert.equal lineCount, count, "Expected #{file} to have #{lineCount} lines. (Had #{count})"
+			
+			readmeContents = fs.readFileSync "#{name}/README.md", 'utf8'
+			assert.notEqual -1, readmeContents.indexOf(name)
 			
 			done()
 		true

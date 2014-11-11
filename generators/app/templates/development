@@ -1,0 +1,10 @@
+# file: development
+#
+# Add your development servers to the inventory here like so:
+#
+#
+# [example-servers]
+# example.local ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222
+# 
+# [vagrant:children]
+# example-servers

@@ -1,6 +1,7 @@
 util = require 'util'
 path = require 'path'
 generators = require 'yeoman-generator'
+handlebars = require 'handlebars'
 
 module.exports = class AnsibleGenerator extends generators.NamedBase
 
@@ -42,17 +43,19 @@ module.exports = class AnsibleGenerator extends generators.NamedBase
 			@write "#{@playbookDir}/#{folder}/.gitkeep", ''
 		
 		# Inventory Files
-		@write "#{@playbookDir}/production", "# file: production\n# Add your production servers to the inventory here."
-		@write "#{@playbookDir}/stage", "# file: stage\n# Add your staging servers to the inventory here."
+		@src.copy "production", "#{@playbookDir}/production"
+		@src.copy "stage", "#{@playbookDir}/stage"
 		
 		# Main
-		@write "#{@playbookDir}/site.yml", "# file: site.yml\n---"
+		@src.copy "site.yml", "#{@playbookDir}/site.yml"
 		
 		if @options.vagrant
-			@write "#{@playbookDir}/Vagrantfile", "TODO"
+			@src.copy "Vagrantfile", "#{@playbookDir}/Vagrantfile"
+			@src.copy "development", "#{@playbookDir}/development"
 		
 		# Ansiblefile for [librarian-ansible](https://github.com/bcoe/librarian-ansible)
-		@write "#{@playbookDir}/Ansiblefile", "#!/usr/bin/env ruby\n#^syntax detection\n\nsite \"https://galaxy.ansible.com/api/v1\""
+		@src.copy "Ansiblefile", "#{@playbookDir}/Ansiblefile"
 		
 		# Create README
-		@write "#{@playbookDir}/README.md", "# #{@name}\n`#{@name}` is a great ansible playbook.\n\n# Setup\n`gem install librarian-ansible`\n`librarian-ansible install`\n\n# Usage\n## Development (if you used `--vagrant` flag: `vagrant up`\nWhen you make changes, run `vagrant provision` to update your vms.\n## Production\n`ansible-playbook -i production site.yml`"
+		template = handlebars.compile(@src.read('README.md'))
+		@write "#{@playbookDir}/README.md", template({name: @name})

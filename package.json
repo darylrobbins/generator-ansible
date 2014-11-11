@@ -28,7 +28,8 @@
     "yeoman-generator": "^0.17.0",
     "chalk": "^0.5.0",
     "yosay": "^0.3.0",
-    "coffee-script": "^1.8.0"
+    "coffee-script": "^1.8.0",
+    "handlebars": "^2.0.0"
   },
   "devDependencies": {
     "mocha": "*"
