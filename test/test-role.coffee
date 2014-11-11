@@ -5,12 +5,12 @@ os = require("os")
 fs = require("fs")
 readline = require("readline")
 
-describe "ansible-generator:roles", ->
+describe "ansible-generator:role", ->
 	
 	it "works with prompt", (done) ->
 		name = "test-role"
 		
-		helpers.run(path.join(__dirname, "../generators/roles"))
+		helpers.run(path.join(__dirname, "../generators/role"))
 		.inDir(path.join(os.tmpdir(), "./test-dir"))
 		.withPrompt({
 			name: name
@@ -41,7 +41,7 @@ describe "ansible-generator:roles", ->
 	it "works with argument", (done) ->
 		name = "test-playbook"
 		
-		helpers.run(path.join(__dirname, "../generators/roles"))
+		helpers.run(path.join(__dirname, "../generators/role"))
 		.inDir(path.join(os.tmpdir(), "./test-dir"))
 		.withArguments([name])
 		.on "end", ->
