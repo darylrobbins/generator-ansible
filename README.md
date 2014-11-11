@@ -11,7 +11,21 @@ npm install -g generator-ansible
 ```
 
 ## Usage
-TODO
+
+### Generate a new playbook
+```bash
+yo ansible NAME_OF_PLAYBOOK
+```
+
+With Vagrant setup:
+```bash
+yo ansible NAME_OF_PLAYBOOK --vagrant
+```
+
+### Generate a new role
+```bash
+yo ansible:role NAME_OF_ROLE
+```
 
 ## Testing
 Run `mocha`
