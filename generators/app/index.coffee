@@ -62,5 +62,5 @@ module.exports = class AnsibleGenerator extends generators.NamedBase
 		@src.copy "Ansiblefile", "#{@playbookDir}/Ansiblefile"
 		
 		# Create README
-		template = handlebars.compile(@src.read('README.md'))
+		template = handlebars.compile(@src.read('README.md.handlebars'))
 		@write "#{@playbookDir}/README.md", template({name: @name})
